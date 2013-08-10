@@ -4,7 +4,7 @@ class ExampleController < CommonAPIController
 
   def peek
     record = Thing.find(params[:id])
-    send_data record.to_json
+    render :json => record
   end
 
   def poke
