@@ -11,11 +11,11 @@ module Example
   end
 
   def peek x
-    JSON.parse(get 'peek', :at => x)
+    JSON.parse(get 'peek', :id => x)
   end
 
   def poke x, y
-    post! 'poke', :at => x, :value => y
+    post! 'poke', :id => x, :value => y
   end
 
 end
