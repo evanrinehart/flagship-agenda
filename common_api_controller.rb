@@ -6,7 +6,9 @@ class CommonAPIController < ApplicationController
   before_filter :check_api_key
 
   def check_https
-    bad_request unless request.ssl?
+    if Rails.env.production? && !request.ssl?
+      bad_request
+    end
   end
 
   def check_post_json
@@ -16,20 +18,25 @@ class CommonAPIController < ApplicationController
   def check_api_key
     provided = params[:api_key]
     needed = API_KEY
-    bad_request unless provided.is_a?(String)
-    forbidden if provided != needed
+    if !provided.is_a?(String)
+      bad_request
+    elsif provided != needed
+      forbidden
+    else
+      # OK
+    end
   end
 
   def bad_request
-    send_data "400 Bad Request", :status => 400
+    send_data "400 Bad Request\n", :status => 400
   end
 
   def forbidden
-    send_data "403 Forbidden", :status => 403
+    send_data "403 Forbidden\n", :status => 403
   end
 
   def not_found
-    send_data "404 Not Found", :status => 404
+    send_data "404 Not Found\n", :status => 404
   end
 
   def index
