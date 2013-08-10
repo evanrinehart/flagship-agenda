@@ -1,5 +1,6 @@
 class CommonAPIController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token
   before_filter :check_https
   before_filter :check_post_json, :if => lambda{|c| request.post?}
   before_filter :check_api_key
