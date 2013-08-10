@@ -39,10 +39,4 @@ class CommonAPIController < ApplicationController
     send_data "404 Not Found\n", :status => 404
   end
 
-  def index
-    # make routes to /api/<blank or invalid method> go here
-    # as defined in the common api spec, this causes a 404
-    not_found
-  end
-
 end
