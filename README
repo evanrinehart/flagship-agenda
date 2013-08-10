@@ -1,9 +1,11 @@
-* all requests are https (400)
+Common API Conventions
+
+* all requests are https
 * requests can be GET or POST
 * all posts must have content type 'application/json'
 * gets must provide api_key in the query string
 * posts must provide api_key in the top level of the json
-* service method uris must be of the form
+* service method URIs must be of the form
   "https://<service>.<domain>/api/<method>"
   where <method> is not blank
 * there are only six possible status codes of the response
@@ -15,12 +17,10 @@
   503 - service temporarily unavailable
 
 400/500 lets us known whether the client or server has the bug.
-503 can be used on the client side to provide better UI beedback.
+503 can be used on the client side to provide better UI feedback.
 
 An api method which guarantees that non-200 response has no
 relevant side effects (besides logging) is known as "solid."
 It may not be possible to guarantee this, in which case the
 method is known as "not solid." Use transactions to make sure
 methods are solid if possible.
-
-
